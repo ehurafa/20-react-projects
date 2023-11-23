@@ -4,17 +4,40 @@ import "./Calculator.css";
 
 const Calculator = () => {
 
+  const [currentValue, setCurrentValue] = useState("0");
+  const [pendingOperation, setPendingOperation] = useState(null);
+  const [pendingValue, setPendingValue] = useState(null);
+  const [completOperation, setCompleteOperation] = useState("");
+
   const keypadNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const operations = ['+', '-', '*', '/'];
 
+  const handleClick = (val) => {
+    setCurrentValue((prevValue) => {
+      if (prevValue === "0") {
+        return val;
+      } else {
+        return prevValue + val;
+      }
+    });
+    setCompleteOperation((prevOperation) => prevOperation + val);
+  };
+
+  const handleClear = () => {
+    setCurrentValue("0");
+    setPendingOperation(null);
+    setPendingValue(null);
+    setCompleteOperation("");
+  }
+
   return (
    <div className="calculator">
-    <div className="complete-operation"></div>
-    <div className="display"></div>
+    <div className="complete-operation">{ completOperation }</div>
+    <div className="display">{ currentValue }</div>
     <div className="buttons">
-      <button>AC</button>
+      <button onClick={handleClear}>AC</button>
       { keypadNumbers.map((num) => (
-        <button key={ num }>{ num }</button>
+        <button key={ num } onClick={() => handleClick(num)}>{ num }</button>
       ))}
       { operations.map((operation) => (
         <button key={ operation }>{ operation }</button>
