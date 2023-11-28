@@ -9,7 +9,7 @@ import "./Timer.css";
 const Timer = () => {
 
     const [millisenconds, setMilliseconds] = useState(0);
-    const [timeOn, setTimeOn] = useState(false);
+    const [timerOn, setTimerOn] = useState(false);
     const [laps, setLaps] = useState([]);
 
     const formatTime = () => {
@@ -31,25 +31,40 @@ const Timer = () => {
         return interval;
     }
 
+    const resetTimer = () => {
+        setMilliseconds(0);
+        setTimerOn(false);
+        setLaps([]);
+    }
+
+    const addLap = () => {
+        setLaps([...laps, formatTime()]);
+    }
+
+    console.log(laps)
+
     useEffect(() => {
         let interval = null;
 
-        if (timeOn) {
+        if (timerOn) {
             interval = startTimer(interval);
         } else {
             interval = stopTimer(interval);
         }
 
         return () => stopTimer(interval)
-    }, [timeOn]);
+    }, [timerOn]);
 
   return (
     <div className="timer-container">
         <TimerDisplay time={ formatTime() } />
-        <TimerControls 
-            onStart={ ()=> setTimeOn(true) }
-            onStop={ ()=> setTimeOn(false) }
-        />
+        <TimerControls
+            timerOn={ timerOn }
+            onStart={ ()=> setTimerOn(true) }
+            onStop={ ()=> setTimerOn(false) }
+            onReset={ resetTimer}
+            onLap={ addLap }
+        /> 
         <LapList />
     </div>
 
