@@ -44,11 +44,11 @@
     padding: 0;
 }
 
-.timer-lap li {
+.timer-laps li {
     border-bottom: 1px solid #ddd;
     padding: 8px 16px;
 }
 
-.timer-lap li:nth-child(odd) {
+.timer-laps li:nth-child(odd) {
     background-color: #ddd;
 }
