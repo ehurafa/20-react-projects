@@ -21,7 +21,11 @@ function App() {
 
       const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }`);
 
+      const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${ city }&appid=${ apiKey }`);
+
+      console.log(forecastResponse)
       setWeather(weatherResponse.data);
+      setForecast(forecastResponse.data.list.slice(0, 5));
 
     } catch(error) {
       console.log("Erro ao buscar o clima", error);
@@ -35,8 +39,12 @@ function App() {
      <div>
       <Title>Condições Climáticas</Title>
       <Search city={ city } setCity={ setCity } searchWeather={ searchWeather }/>
-      <CurrentWeather />
-      <Forecast />
+      { weather && (
+        <CurrentWeather weather={ weather }/>
+      )}
+      { forecast.length > 0 && (
+        <Forecast forecast={ forecast } />
+      )}
      </div>
     </>
   )
