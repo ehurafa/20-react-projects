@@ -16,13 +16,25 @@ function App() {
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
 
-  console.log('apiKey ', apiKey)
+  const searchWeather = async() => {
+    try {
+
+      const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }`);
+
+      setWeather(weatherResponse.data);
+
+    } catch(error) {
+      console.log("Erro ao buscar o clima", error);
+    }
+  }
+
+  console.log('clima ', weather);
 
   return (
     <>
      <div>
       <Title>Condições Climáticas</Title>
-      <Search />
+      <Search city={ city } setCity={ setCity } searchWeather={ searchWeather }/>
       <CurrentWeather />
       <Forecast />
      </div>
