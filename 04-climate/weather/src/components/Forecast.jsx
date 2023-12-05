@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Forecast = ({ forecast: forecastList } ) => { 
-  console.log('x ', forecastList)
+  
   return (
     <div>
       <h4>Previsão para as próximas horas</h4>

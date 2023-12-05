@@ -16,12 +16,28 @@ function App() {
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${ apiKey }&units=metric&lang=pt_br`
+      );
+
+      setCity(response.data.name);
+      setWeather(response.data);
+
+    });
+
+  },);
+
   const searchWeather = async() => {
     try {
 
-      const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }`);
+      const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }&units=metric&lang=pt_br`);
 
-      const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${ city }&appid=${ apiKey }`);
+      const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${ city }&appid=${ apiKey }&units=metric&lang=pt_br`);
 
       console.log(forecastResponse)
       setWeather(weatherResponse.data);
