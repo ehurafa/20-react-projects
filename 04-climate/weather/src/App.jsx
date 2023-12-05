@@ -6,7 +6,7 @@ import CurrentWeather from './components/CurrentWeather'
 import Forecast from './components/Forecast';
 
 
-import { Title } from "./AppStyles";
+import { Title, WeatherContainer } from "./AppStyles";
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
 
     });
 
-  },);
+  },[]);
 
   const searchWeather = async() => {
     try {
@@ -39,7 +39,7 @@ function App() {
 
       const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${ city }&appid=${ apiKey }&units=metric&lang=pt_br`);
 
-      console.log(forecastResponse)
+      console.log('forecastResponse', forecastResponse)
       setWeather(weatherResponse.data);
       setForecast(forecastResponse.data.list.slice(0, 5));
 
@@ -52,7 +52,7 @@ function App() {
 
   return (
     <>
-     <div>
+     <WeatherContainer>
       <Title>Condições Climáticas</Title>
       <Search city={ city } setCity={ setCity } searchWeather={ searchWeather }/>
       { weather && (
@@ -61,7 +61,7 @@ function App() {
       { forecast.length > 0 && (
         <Forecast forecast={ forecast } />
       )}
-     </div>
+     </WeatherContainer>
     </>
   )
 }

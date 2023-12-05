@@ -1,16 +1,19 @@
-import React from 'react'
+import React from 'react';
+
+import "./SearchStyles";
+import { SearchButton, SearchCity, SearchContainer } from './SearchStyles';
 
 const Search = ({ city, setCity, searchWeather}) => {
   return (
-    <div>
-      <input
+    <SearchContainer>
+      <SearchCity
         type="text"
         value={ city }
         onChange={ (e) => setCity(e.target.value) }
         placeholder="Digite uma cidade..."
       />
-      <button onClick={ searchWeather }>Buscar</button>
-    </div>
+      <SearchButton onClick={ searchWeather }>Buscar</SearchButton>
+    </SearchContainer>
   )
 }
 

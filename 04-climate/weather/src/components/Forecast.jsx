@@ -1,9 +1,10 @@
 import React from 'react'
+import { ForecastContainer } from './ForecastStyles'
 
 const Forecast = ({ forecast: forecastList } ) => { 
   
   return (
-    <div>
+    <ForecastContainer>
       <h4>Previsão para as próximas horas</h4>
       <ul>
         { forecastList.map((forecast) => (
@@ -17,7 +18,7 @@ const Forecast = ({ forecast: forecastList } ) => {
           </li>
         ))}        
       </ul>
-    </div>
+    </ForecastContainer>
   )
 }
 
