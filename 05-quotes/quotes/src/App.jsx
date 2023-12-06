@@ -12,8 +12,8 @@ function App() {
   }
 
   return (
-    <div className="container mt-5"> 
-      <p>{ quotes[index].text}</p>
+    <div className="container mt-5">
+      <Quote text={ quotes[index].text} author={ quotes[index].author } />
       <button className="btn btn-success mt-2" onClick={nextQuote}>Próxima citação</button>
     </div>
   )
