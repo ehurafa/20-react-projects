@@ -11,9 +11,9 @@ const PhotoList = ({ photos, setDetailedPhoto }) => {
 
   return ( 
     <div className="album">
-        { photos.map((photo) => (
+        { photos && photos.map((photo) => (
             <Photo key={ photo.id } info={ photo } setDetailedPhoto={ setDetailedPhoto } />
-        ))};
+        ))}
     </div>
   )
 }
