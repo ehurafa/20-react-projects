@@ -44,3 +44,26 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+.detailed-photo-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailed-photo-container {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.detailed-photo-container img {
+  max-width: 45%;
+  max-height: 100%;
+  border-radius: 8px;
+}

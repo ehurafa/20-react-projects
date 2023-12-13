@@ -11,6 +11,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [detailedPhoto, setDetailedPhoto] = useState(null);
+
 
   const fetchData = async({ query, category }) => {
     const apiKey = import.meta.env.VITE_UNSPLASH_API_KEY;
@@ -26,14 +28,20 @@ function App() {
   };
 
   useEffect(() => {
+    console.log(detailedPhoto)
+  }, [setDetailedPhoto]);
+
+  useEffect(() => {
     fetchData(query, category);
   }, []);
 
   return (
     <div className="container">
       <Searchbar />
-      <PhotoList photos={ photos }/>
-      <DetailedPhoto />
+      <PhotoList photos={ photos } setDetailedPhoto={ setDetailedPhoto }/>
+      { detailedPhoto && (
+        <DetailedPhoto photo={ detailedPhoto } setDetailedPhoto={ setDetailedPhoto } />
+      )}
     </div>
   )
 }
