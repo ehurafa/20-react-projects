@@ -6,8 +6,27 @@ const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null))
   const winner = false;
 
+  const [aiIsThinking, setAiIsThinking] = useState(false);
+
   const handleClick = (i) => {
-    console.log(i)
+    
+    if (squares[i] || winner) return;
+
+    const newSquares = squares.slice();
+
+    newSquares[i] = isNext ? 'X' : 'O';
+
+    setSquares(newSquares);
+
+    setIsNext(!isNext);
+
+    console.log(newSquares)
+
+  }
+
+  const resetGame = () => {
+    setSquares(Array(9).fill(null));
+    setIsNext(true);
   }
 
   return (
@@ -33,7 +52,7 @@ const Board = () => {
         <Square value={squares[7]} onClick={() => handleClick(7)} />
         <Square value={squares[8]} onClick={() => handleClick(8)} />
       </div>
-      <button className="reset-button">Reiniciar jogo</button>
+      <button className="reset-button" onClick={resetGame}>Reiniciar jogo</button>
     </div>
   )
 }
