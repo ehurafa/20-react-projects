@@ -2,7 +2,10 @@ import React from 'react'
 
 const AddTodo = () => {
   return (
-    <div>AddTodo</div>
+    <form>
+      <input type="text" placeholder="Adicione uma tarefa..." />
+      <button type="submit">Enviar</button>
+    </form>
   )
 }
 
