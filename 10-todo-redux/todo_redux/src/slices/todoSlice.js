@@ -7,8 +7,16 @@ export const todoSlice = createSlice({
         filter: 'all'
     },
     reducers: {
-        
+        addTodo: (state, action) => {
+            state.list.push({
+                id: new Date().toISOString(),
+                text: action.payload,
+                completed: false
+            })
+        }
     }
 })
+
+export const { addTodo } = todoSlice.actions
 
 export default todoSlice.reducer
