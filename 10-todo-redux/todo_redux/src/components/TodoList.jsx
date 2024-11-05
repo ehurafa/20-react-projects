@@ -2,8 +2,12 @@ import React from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 
+import { toggleTodo } from '../slices/todoSlice'
+
 const TodoList = () => {
   const { list, filter } = useSelector((state) => state.todos)
+
+  const dispatch = useDispatch()
 
   return (
     <div>
@@ -14,7 +18,10 @@ const TodoList = () => {
         {
           list.map((todo) => (
             <li key={ todo.id }>
-              <span>{ todo.text }</span>
+              <span
+                onClick={() => dispatch(toggleTodo(todo.id))}
+                className={todo.completed ? 'line-through' : null}
+              >{ todo.text }</span>
               <button>{ todo.text }</button>
             </li>
           ))
